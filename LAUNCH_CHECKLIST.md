@@ -16,10 +16,10 @@ This checklist tracks the governance, marketing, and engineering feedback for th
 
 | Item | Status | Solution / Reference |
 | --- | --- | --- |
-| Vulnerability hook | Partial | Homepage and [CASE_STUDIES.md](./CASE_STUDIES.md) show risky actions. A sharper database/API-key story should be added next. |
+| Vulnerability hook | Done | Homepage now shows the broad API key failure mode, names prompt injection as out of scope, and explains deny-before-execute as the mitigation. [CASE_STUDIES.md](./CASE_STUDIES.md) adds concrete examples. |
 | Newsletter / lead capture | Done | Homepage includes a Buttondown-powered "Join the Alpha" form for `oscarmackjr`. |
 | One-sentence pitch | Done | README and [LAUNCH_BRIEF.md](./LAUNCH_BRIEF.md): "Open-source identity, policy, and audit evidence for autonomous AI agents." |
-| Social kit | Done | [LAUNCH_BRIEF.md](./LAUNCH_BRIEF.md) includes Hacker News, LinkedIn, and X draft copy. |
+| Social kit | Done | [SOCIAL_KIT.md](./SOCIAL_KIT.md) includes Hacker News, LinkedIn, X, approved claims, and claims to avoid. [LAUNCH_BRIEF.md](./LAUNCH_BRIEF.md) keeps the narrative brief. |
 | Branding sync | Partial | Website and README share narrative and architecture assets. A reusable wordmark/logo remains planned. |
 
 ## Technical Trust And Security
@@ -32,7 +32,7 @@ This checklist tracks the governance, marketing, and engineering feedback for th
 | SECURITY.md | Done | [SECURITY.md](./SECURITY.md) exists and GitHub private vulnerability reporting is enabled. |
 | Repo cleanup | Done | Public repo excludes `.env`, `.terraform`, Terraform state, logs, and dependencies. |
 | Secret scanning | Done | GitHub secret scanning and push protection are enabled. Local tracked-file scan found no obvious secrets. |
-| SDK documentation | Partial | README and [SDK_REVIEW.md](./SDK_REVIEW.md) document usage. A dedicated SDK API reference remains useful. |
+| SDK documentation | Done | README, [SDK_REVIEW.md](./SDK_REVIEW.md), and [SDK_API.md](./SDK_API.md) document usage, API shape, helper methods, and fail-closed behavior. |
 | Branch protection | Done | `main` requires PR review, required `test`, stale review dismissal, admin enforcement, conversation resolution, no force pushes, and no deletions. |
 | Automated scans | Done | CI includes tests, npm audit, dependency review, CodeQL, and Dependabot. |
 

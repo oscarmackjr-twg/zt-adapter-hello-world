@@ -28,6 +28,8 @@ Start here if you need to understand the security model before writing code:
 - [Governance](./GOVERNANCE.md): rules of engagement, stakeholder communication, and launch checklist.
 - [Launch Checklist](./LAUNCH_CHECKLIST.md): status of review feedback, completed work, and open launch items.
 - [Launch Brief](./LAUNCH_BRIEF.md): public narrative, audience, suggested launch message, and social-proof policy.
+- [Social Kit](./SOCIAL_KIT.md): launch-ready copy for Hacker News, LinkedIn, X, and approved public claims.
+- [SDK API](./SDK_API.md): `ZeroTrustClient` constructor, decision methods, helper methods, and fail-closed behavior.
 - [Engineering Spec](./ENGINEERING_SPEC.md): required code and infrastructure changes that should be implemented deliberately.
 - [Docker Local Broker](./brokers/docker-local/README.md): first public Execution Broker example.
 - [Authorization Gateway Terraform](./infra/terraform/examples/authorization-gateway/README.md): IAM-authorized public IaC example.

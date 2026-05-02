@@ -83,6 +83,12 @@ const docs = [
     summary: "Public launch narrative, audience, suggested message, and social-proof policy.",
   },
   {
+    slug: "social-kit",
+    title: "Social Kit",
+    file: "SOCIAL_KIT.md",
+    summary: "Approved launch copy, platform-specific posts, claims to use, and claims to avoid.",
+  },
+  {
     slug: "engineering-spec",
     title: "Engineering Spec",
     file: "ENGINEERING_SPEC.md",
@@ -93,6 +99,12 @@ const docs = [
     title: "SDK Review",
     file: "SDK_REVIEW.md",
     summary: "How the public client differs from the first-customer draft SDK.",
+  },
+  {
+    slug: "sdk-api",
+    title: "SDK API",
+    file: "SDK_API.md",
+    summary: "ZeroTrustClient constructor, decision methods, fail-closed behavior, and testing patterns.",
   },
   {
     slug: "changelog",
@@ -244,6 +256,19 @@ function landingPage() {
         The first proof is deliberately simple: an agent attempts a dangerous action,
         policy blocks it before execution, and the adapter returns a verifiable audit-shaped response.
       </p>
+      <section class="vulnerability-hook" aria-label="Vulnerability example">
+        <div class="hook-label">The failure mode</div>
+        <h2>A broad API key can turn one bad instruction into real damage</h2>
+        <p>
+          An agent starts with a legitimate task and a powerful cloud, repository, or SaaS token.
+          A prompt, plugin, or tool instruction pushes it toward a dangerous call: delete a database,
+          terminate infrastructure, export private data, or create an unauthorized pull request.
+        </p>
+        <p>
+          ZT-Infra does not claim to prevent prompt injection. It puts policy in front of the resulting
+          tool call: deny the action, skip execution, and return audit evidence.
+        </p>
+      </section>
       <section class="status-banner" aria-label="Current versus planned">
         <div>
           <strong>Current:</strong> public Hello World adapter, local mock control plane, deny-before-execute demo,
@@ -614,6 +639,21 @@ function sharedStyles() {
     }
     .callout {
       margin-top: 32px;
+    }
+    .vulnerability-hook {
+      margin-top: 28px;
+      padding: 22px;
+      border: 1px solid #efb8b8;
+      border-left: 5px solid var(--danger);
+      border-radius: 8px;
+      background: #fff7f6;
+    }
+    .hook-label {
+      color: var(--danger);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin-bottom: 10px;
     }
     .lede { font-size: 1.08rem; }
     .status-banner {

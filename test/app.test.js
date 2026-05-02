@@ -43,6 +43,9 @@ test("root endpoint returns browser-friendly html", async () => {
   assert.match(response.body, /Current:/);
   assert.match(response.body, /Planned:/);
   assert.match(response.body, /Code to architecture/);
+  assert.match(response.body, /broad API key/);
+  assert.match(response.body, /delete a database/);
+  assert.match(response.body, /does not claim to prevent prompt injection/);
   assert.match(response.body, /Join the alpha/);
   assert.match(response.body, /buttondown\.com\/api\/emails\/embed-subscribe\/oscarmackjr/);
   assert.match(response.body, /Get updates/);
@@ -83,6 +86,8 @@ test("docs index lists repository documents", async () => {
   assert.match(response.body, /Day 1 Use Cases/);
   assert.match(response.body, /Why IAM Fails Agents/);
   assert.match(response.body, /Launch Checklist/);
+  assert.match(response.body, /Social Kit/);
+  assert.match(response.body, /SDK API/);
   assert.match(response.body, /Threat Model/);
 });
 
@@ -130,6 +135,21 @@ test("case studies and IAM whitepaper render", async () => {
   assert.equal(iam.statusCode, 200);
   assert.match(caseStudies.body, /Finance Agent In A Docker Sandbox/);
   assert.match(iam.body, /Traditional IAM Is Not Enough/);
+});
+
+test("social kit and SDK API docs render", async () => {
+  const social = fakeResponse();
+  const sdk = fakeResponse();
+
+  await routeRequest({ method: "GET", url: "/docs/social-kit", headers: { accept: "text/html" } }, social);
+  await routeRequest({ method: "GET", url: "/docs/sdk-api", headers: { accept: "text/html" } }, sdk);
+
+  assert.equal(social.statusCode, 200);
+  assert.equal(sdk.statusCode, 200);
+  assert.match(social.body, /Show HN/);
+  assert.match(social.body, /Claims To Avoid/);
+  assert.match(sdk.body, /ZeroTrustClient/);
+  assert.match(sdk.body, /Fail-Closed Rule/);
 });
 
 test("roadmap and governance clarify launch status", async () => {
