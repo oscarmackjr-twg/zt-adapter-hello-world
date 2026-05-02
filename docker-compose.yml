@@ -10,6 +10,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+      - mock-control-plane-node-modules:/app/node_modules
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/health"]
       interval: 5s
@@ -32,3 +33,8 @@ services:
       - "8080:8080"
     volumes:
       - .:/app
+      - web-adapter-node-modules:/app/node_modules
+
+volumes:
+  mock-control-plane-node-modules:
+  web-adapter-node-modules:
