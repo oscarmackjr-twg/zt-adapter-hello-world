@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import fs from "node:fs";
 import { test } from "node:test";
 
 import { routeRequest } from "../src/app.js";
@@ -130,35 +129,6 @@ test("all docs routes render markdown content", async () => {
     assert.equal(response.statusCode, 200, slug);
     assert.doesNotMatch(response.body, /ENOENT/, slug);
     assert.match(response.body, /<main>/, slug);
-  }
-});
-
-test("Vercel function bundles markdown docs", () => {
-  const config = JSON.parse(fs.readFileSync("vercel.json", "utf8"));
-  const includeFiles = config.functions["api/index.js"].includeFiles;
-
-  for (const file of [
-    "ADAPTER_CONTRACT.md",
-    "ARCHITECTURE.md",
-    "CASE_STUDIES.md",
-    "CHANGELOG.md",
-    "CONTRIBUTING.md",
-    "ENGINEERING_SPEC.md",
-    "GOVERNANCE.md",
-    "IDENTITY_AND_POLICY.md",
-    "LAUNCH_BRIEF.md",
-    "LAUNCH_CHECKLIST.md",
-    "README.md",
-    "ROADMAP.md",
-    "SDK_API.md",
-    "SDK_REVIEW.md",
-    "SECURITY.md",
-    "SOCIAL_KIT.md",
-    "THREAT_MODEL.md",
-    "WHY_TRADITIONAL_IAM_FAILS.md",
-    "public/architecture.svg",
-  ]) {
-    assert.ok(includeFiles.includes(file), `${file} must be included in the Vercel function bundle`);
   }
 });
 

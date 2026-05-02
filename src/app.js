@@ -1,7 +1,39 @@
-import fs from "node:fs/promises";
-import path from "node:path";
+import fs from "node:fs";
 
 import { checkAction } from "./adapter.js";
+
+const bundledFiles = new Map([
+  ["ADAPTER_CONTRACT.md", fs.readFileSync(new URL("../ADAPTER_CONTRACT.md", import.meta.url), "utf8")],
+  ["ARCHITECTURE.md", fs.readFileSync(new URL("../ARCHITECTURE.md", import.meta.url), "utf8")],
+  ["CASE_STUDIES.md", fs.readFileSync(new URL("../CASE_STUDIES.md", import.meta.url), "utf8")],
+  ["CHANGELOG.md", fs.readFileSync(new URL("../CHANGELOG.md", import.meta.url), "utf8")],
+  ["CONTRIBUTING.md", fs.readFileSync(new URL("../CONTRIBUTING.md", import.meta.url), "utf8")],
+  ["ENGINEERING_SPEC.md", fs.readFileSync(new URL("../ENGINEERING_SPEC.md", import.meta.url), "utf8")],
+  ["GOVERNANCE.md", fs.readFileSync(new URL("../GOVERNANCE.md", import.meta.url), "utf8")],
+  ["IDENTITY_AND_POLICY.md", fs.readFileSync(new URL("../IDENTITY_AND_POLICY.md", import.meta.url), "utf8")],
+  ["LAUNCH_BRIEF.md", fs.readFileSync(new URL("../LAUNCH_BRIEF.md", import.meta.url), "utf8")],
+  ["LAUNCH_CHECKLIST.md", fs.readFileSync(new URL("../LAUNCH_CHECKLIST.md", import.meta.url), "utf8")],
+  ["README.md", fs.readFileSync(new URL("../README.md", import.meta.url), "utf8")],
+  ["ROADMAP.md", fs.readFileSync(new URL("../ROADMAP.md", import.meta.url), "utf8")],
+  ["SDK_API.md", fs.readFileSync(new URL("../SDK_API.md", import.meta.url), "utf8")],
+  ["SDK_REVIEW.md", fs.readFileSync(new URL("../SDK_REVIEW.md", import.meta.url), "utf8")],
+  ["SECURITY.md", fs.readFileSync(new URL("../SECURITY.md", import.meta.url), "utf8")],
+  ["SOCIAL_KIT.md", fs.readFileSync(new URL("../SOCIAL_KIT.md", import.meta.url), "utf8")],
+  ["THREAT_MODEL.md", fs.readFileSync(new URL("../THREAT_MODEL.md", import.meta.url), "utf8")],
+  [
+    "WHY_TRADITIONAL_IAM_FAILS.md",
+    fs.readFileSync(new URL("../WHY_TRADITIONAL_IAM_FAILS.md", import.meta.url), "utf8"),
+  ],
+  ["public/architecture.svg", fs.readFileSync(new URL("../public/architecture.svg", import.meta.url), "utf8")],
+]);
+
+function readBundledFile(file) {
+  const contents = bundledFiles.get(file);
+  if (contents === undefined) {
+    throw new Error(`Bundled file is not registered: ${file}`);
+  }
+  return contents;
+}
 
 const docs = [
   {
@@ -129,7 +161,7 @@ export async function routeRequest(request, response) {
   }
 
   if (request.method === "GET" && url.pathname === "/quickstart") {
-    const markdown = await fs.readFile(path.join(process.cwd(), "README.md"), "utf8");
+    const markdown = readBundledFile("README.md");
     return html(response, 200, docsShell("Quickstart", markdownToHtml(markdown)));
   }
 
@@ -138,7 +170,7 @@ export async function routeRequest(request, response) {
   }
 
   if (request.method === "GET" && url.pathname === "/architecture.svg") {
-    const svg = await fs.readFile(path.join(process.cwd(), "public", "architecture.svg"), "utf8");
+    const svg = readBundledFile("public/architecture.svg");
     response.writeHead(200, {
       "content-type": "image/svg+xml; charset=utf-8",
       "cache-control": "public, max-age=300",
@@ -160,7 +192,7 @@ export async function routeRequest(request, response) {
     if (doc.slug === "architecture") {
       return html(response, 200, docsShell(doc.title, architecturePageContent()));
     }
-    const markdown = await fs.readFile(path.join(process.cwd(), doc.file), "utf8");
+    const markdown = readBundledFile(doc.file);
     return html(response, 200, docsShell(doc.title, markdownToHtml(markdown)));
   }
 
