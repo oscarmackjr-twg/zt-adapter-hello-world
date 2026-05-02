@@ -71,6 +71,12 @@ const docs = [
     summary: "Launch readiness, stakeholder communication, and rules of engagement.",
   },
   {
+    slug: "launch-checklist",
+    title: "Launch Checklist",
+    file: "LAUNCH_CHECKLIST.md",
+    summary: "Reviewer checklist with completed, partial, open, and blocked launch items.",
+  },
+  {
     slug: "launch-brief",
     title: "Launch Brief",
     file: "LAUNCH_BRIEF.md",

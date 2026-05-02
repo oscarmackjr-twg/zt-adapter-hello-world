@@ -17,3 +17,6 @@
 - Adds a public IAM-authorized Terraform Authorization Gateway example.
 - Adds `zt-audit verify audit.json` for local audit-shaped response verification.
 - Adds CodeQL, dependency review, Dependabot configuration, homepage Code-to-Architecture flow, and Current vs Planned banner.
+- Switches the public adapter license from MIT to Apache-2.0 for enterprise-friendly infrastructure adoption.
+- Adds Docker Compose quickstart, 90-day roadmap status table, Nono status, and explicit coding standards.
+- Adds launch checklist documentation and publishes it on the docs site.
