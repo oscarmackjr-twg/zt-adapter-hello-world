@@ -1,5 +1,30 @@
 {
   "version": 2,
+  "functions": {
+    "api/index.js": {
+      "includeFiles": [
+        "ADAPTER_CONTRACT.md",
+        "ARCHITECTURE.md",
+        "CASE_STUDIES.md",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "ENGINEERING_SPEC.md",
+        "GOVERNANCE.md",
+        "IDENTITY_AND_POLICY.md",
+        "LAUNCH_BRIEF.md",
+        "LAUNCH_CHECKLIST.md",
+        "README.md",
+        "ROADMAP.md",
+        "SDK_API.md",
+        "SDK_REVIEW.md",
+        "SECURITY.md",
+        "SOCIAL_KIT.md",
+        "THREAT_MODEL.md",
+        "WHY_TRADITIONAL_IAM_FAILS.md",
+        "public/architecture.svg"
+      ]
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",
