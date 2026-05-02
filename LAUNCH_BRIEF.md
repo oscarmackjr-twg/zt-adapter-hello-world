@@ -50,6 +50,7 @@ Current reusable assets:
 - architecture page: `/docs/architecture`;
 - architecture SVG: `/architecture.svg`;
 - asciinema terminal recording: `recordings/agent-blocked-then-authorized.cast`.
+- alpha signup: homepage "Join the Alpha" form powered by Buttondown.
 
 Planned asset:
 

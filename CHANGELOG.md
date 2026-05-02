@@ -20,3 +20,4 @@
 - Switches the public adapter license from MIT to Apache-2.0 for enterprise-friendly infrastructure adoption.
 - Adds Docker Compose quickstart, 90-day roadmap status table, Nono status, and explicit coding standards.
 - Adds launch checklist documentation and publishes it on the docs site.
+- Adds Buttondown-powered "Join the Alpha" signup to the homepage.

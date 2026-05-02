@@ -214,6 +214,8 @@ http://127.0.0.1:8080/demo/allow
 
 This repo is Vercel-ready. The browser homepage is served from `/`, and JSON demo endpoints remain available under the same paths.
 
+The homepage includes a Buttondown-powered "Join the Alpha" form. It posts directly to Buttondown and does not store email addresses in this app.
+
 1. Import the GitHub repo into Vercel:
 
 ```text

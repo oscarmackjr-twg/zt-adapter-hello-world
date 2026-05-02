@@ -17,7 +17,7 @@ This checklist tracks the governance, marketing, and engineering feedback for th
 | Item | Status | Solution / Reference |
 | --- | --- | --- |
 | Vulnerability hook | Partial | Homepage and [CASE_STUDIES.md](./CASE_STUDIES.md) show risky actions. A sharper database/API-key story should be added next. |
-| Newsletter / lead capture | Open | Provider selection needed: Buttondown, ConvertKit, Mailchimp, Formspree, or a temporary `mailto:` flow. |
+| Newsletter / lead capture | Done | Homepage includes a Buttondown-powered "Join the Alpha" form for `oscarmackjr`. |
 | One-sentence pitch | Done | README and [LAUNCH_BRIEF.md](./LAUNCH_BRIEF.md): "Open-source identity, policy, and audit evidence for autonomous AI agents." |
 | Social kit | Done | [LAUNCH_BRIEF.md](./LAUNCH_BRIEF.md) includes Hacker News, LinkedIn, and X draft copy. |
 | Branding sync | Partial | Website and README share narrative and architecture assets. A reusable wordmark/logo remains planned. |
@@ -45,4 +45,3 @@ This checklist tracks the governance, marketing, and engineering feedback for th
 | `docker compose config` | Passed |
 | `docker compose up -d` | Blocked locally because Docker daemon was not running |
 | `git diff --check` | Passed |
-

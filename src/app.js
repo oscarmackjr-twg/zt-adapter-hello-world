@@ -314,6 +314,30 @@ function landingPage() {
           ZT-Infra makes that decision point explicit and keeps the public starter small enough to verify.
         </p>
       </section>
+      <section class="signup" aria-label="Join the alpha">
+        <div>
+          <h2>Join the alpha</h2>
+          <p>
+            Get occasional updates on the adapter SDK, execution brokers, identity work,
+            and audit verification. No app account or API key is required.
+          </p>
+        </div>
+        <form
+          action="https://buttondown.com/api/emails/embed-subscribe/oscarmackjr"
+          method="post"
+          class="embeddable-buttondown-form"
+        >
+          <label for="bd-email">Email</label>
+          <div class="signup-row">
+            <input type="email" name="email" id="bd-email" placeholder="you@example.com" required>
+            <input type="hidden" value="1" name="embed">
+            <button type="submit">Get updates</button>
+          </div>
+          <p class="fine-print">
+            Powered by <a href="https://buttondown.com/refer/oscarmackjr" target="_blank" rel="noreferrer">Buttondown</a>.
+          </p>
+        </form>
+      </section>
       <section class="grid" aria-label="Documentation">
         ${docs
           .slice(0, 9)
@@ -664,9 +688,63 @@ function sharedStyles() {
     .flow-arrow.deny::after {
       border-left-color: var(--danger);
     }
+    .signup {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: 22px;
+      align-items: center;
+      margin-top: 32px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+    .signup form {
+      display: grid;
+      gap: 10px;
+    }
+    .signup label {
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .signup-row {
+      display: flex;
+      gap: 10px;
+    }
+    .signup input[type="email"] {
+      min-width: 0;
+      flex: 1;
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font: inherit;
+    }
+    .signup button {
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      background: var(--accent);
+      color: #ffffff;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .fine-print {
+      margin: 0;
+      font-size: 0.88rem;
+    }
     @media (max-width: 820px) {
       .flow-track {
         grid-template-columns: 1fr;
+      }
+      .signup {
+        grid-template-columns: 1fr;
+      }
+      .signup-row {
+        flex-direction: column;
       }
       .flow-arrow {
         width: 2px;

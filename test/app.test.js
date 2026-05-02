@@ -43,6 +43,9 @@ test("root endpoint returns browser-friendly html", async () => {
   assert.match(response.body, /Current:/);
   assert.match(response.body, /Planned:/);
   assert.match(response.body, /Code to architecture/);
+  assert.match(response.body, /Join the alpha/);
+  assert.match(response.body, /buttondown\.com\/api\/emails\/embed-subscribe\/oscarmackjr/);
+  assert.match(response.body, /Get updates/);
 });
 
 test("quickstart page renders readme content", async () => {
