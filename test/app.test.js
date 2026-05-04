@@ -52,25 +52,26 @@ test("root endpoint returns browser-friendly html", async () => {
 
   assert.equal(response.statusCode, 200);
   assert.match(response.headers["content-type"], /text\/html/);
-  assert.match(response.body, /Identity, policy, and audit evidence for autonomous agents/);
-  assert.match(response.body, /mathematical attestation layer/);
-  assert.match(response.body, /cannot quietly scrub the history/);
+  assert.match(response.body, /Adapter contract and audit envelope for autonomous agent actions/);
+  assert.match(response.body, /integration layer between agent frameworks/);
+  assert.match(response.body, /request shape, allow\/deny response shape/);
   assert.match(response.body, /Start the quickstart/);
   assert.match(response.body, /Hello World is the proof path/);
   assert.match(response.body, /Current:/);
   assert.match(response.body, /Planned:/);
   assert.match(response.body, /Apache-2\.0/);
   assert.match(response.body, /Explorer verification/);
+  assert.match(response.body, /Project scope/);
   assert.match(response.body, /Enterprise readiness/);
   assert.match(response.body, /Life of a request/);
   assert.match(response.body, /10-minute Web3 setup/);
-  assert.match(response.body, /Defense in depth/);
+  assert.match(response.body, /Clear layer boundaries/);
   assert.match(response.body, /Zero Trust Infrastructure/);
   assert.match(response.body, /https:\/\/discord\.gg\/cDS8MPX6G/);
   assert.match(response.body, /Phase 1 Ready/);
   assert.match(response.body, /Launch Readiness/);
   assert.match(response.body, /Interoperability/);
-  assert.match(response.body, /not raw chat storage/);
+  assert.match(response.body, /Composes with nono/);
   assert.match(response.body, /Code to architecture/);
   assert.match(response.body, /broad API key/);
   assert.match(response.body, /delete a database/);
@@ -167,6 +168,7 @@ test("docs index lists repository documents", async () => {
   assert.match(response.body, /Social Kit/);
   assert.match(response.body, /SDK API/);
   assert.match(response.body, /Threat Model/);
+  assert.match(response.body, /Project Scope/);
   assert.match(response.body, /Enterprise Readiness/);
   assert.match(response.body, /Life Of A Request/);
   assert.match(response.body, /10-Minute Web3 Integration/);
@@ -186,6 +188,7 @@ test("all docs routes render markdown content", async () => {
   const slugs = [
     "identity-policy",
     "interoperability",
+    "project-scope",
     "phase1-ready",
     "enterprise-readiness",
     "life-of-request",
@@ -241,6 +244,20 @@ test("interoperability inventory renders supported languages and interfaces", as
   assert.match(response.body, /Base Sepolia example transactions/);
 });
 
+test("project scope doc narrows the product positioning", async () => {
+  const response = fakeResponse();
+
+  await routeRequest({ method: "GET", url: "/docs/project-scope", headers: { accept: "text/html" } }, response);
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /Project Scope/);
+  assert.match(response.body, /adapter contract and audit envelope/);
+  assert.match(response.body, /Not a policy engine/);
+  assert.match(response.body, /nono As Flagship Containment Example/);
+  assert.match(response.body, /SPIFFE\/SPIRE/);
+  assert.match(response.body, /OPA or Cedar/);
+});
+
 test("enterprise readiness and Web3 integration docs render CTO trust gaps", async () => {
   const enterprise = fakeResponse();
   const life = fakeResponse();
@@ -273,6 +290,8 @@ test("architecture doc renders reusable diagram", async () => {
   assert.equal(response.statusCode, 200);
   assert.match(response.body, /ZT-Infra Architecture/);
   assert.match(response.body, /src="\/architecture\.svg"/);
+  assert.match(response.body, /Layer Boundaries/);
+  assert.match(response.body, /Execution containment/);
 });
 
 test("website exposes launch review documentation", async () => {

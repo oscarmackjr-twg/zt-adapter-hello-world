@@ -22,7 +22,7 @@ This checklist tracks the governance, marketing, and engineering feedback for th
 | --- | --- | --- |
 | Vulnerability hook | Done | Homepage now shows the broad API key failure mode, names prompt injection as out of scope, and explains deny-before-execute as the mitigation. [CASE_STUDIES.md](./CASE_STUDIES.md) adds concrete examples. |
 | Newsletter / lead capture | Done | Homepage includes a Buttondown-powered "Join the Alpha" form for `oscarmackjr`. |
-| One-sentence pitch | Done | README and [LAUNCH_BRIEF.md](./LAUNCH_BRIEF.md): "Open-source identity, policy, and audit evidence for autonomous AI agents." |
+| One-sentence pitch | Done | README and [LAUNCH_BRIEF.md](./LAUNCH_BRIEF.md): "An open adapter contract and audit envelope for agent action authorization." |
 | Social kit | Done | [SOCIAL_KIT.md](./SOCIAL_KIT.md) includes Hacker News, LinkedIn, X, approved claims, and claims to avoid. [LAUNCH_BRIEF.md](./LAUNCH_BRIEF.md) keeps the narrative brief. |
 | Branding sync | Partial | Website and README share narrative and architecture assets. A reusable wordmark/logo remains planned. |
 | ROI metrics | Done | [ROI_METRICS.md](./ROI_METRICS.md) explains cost avoidance, operational metrics, and business value. |

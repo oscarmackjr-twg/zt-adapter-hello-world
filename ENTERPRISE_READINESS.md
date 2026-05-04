@@ -50,7 +50,7 @@ External provider documentation to review during procurement:
 
 ## Defense In Depth
 
-ZT-Infra is not a single sandbox claim. It is a layered control plane:
+ZT-Infra is not a single sandbox claim. It is the adapter and audit layer in a defense-in-depth stack:
 
 | Layer | Control |
 | --- | --- |
