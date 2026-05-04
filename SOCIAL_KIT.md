@@ -78,7 +78,8 @@ https://www.zt-infra.org
 - Do not claim SOC 2 readiness.
 - Do not claim prompt-injection prevention.
 - Do not claim every adapter framework version is certified.
-- Do not claim DAAL/blockchain audit proof is complete until the public testnet verifier exists.
+- Do not claim every production audit log is blockchain verified until reconciliation, alerting, and delivery-rate evidence exist.
+- Use "mathematical attestation" or "non-repudiation layer" before "blockchain" in enterprise messaging.
 - Do not claim smart contracts are verified on an explorer until `EXPLORER_VERIFICATION.md` includes a real contract address and verified source link.
 - Do not imply the local mock signatures are production cryptographic proof.
 

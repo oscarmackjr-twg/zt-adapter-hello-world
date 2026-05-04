@@ -53,17 +53,24 @@ test("root endpoint returns browser-friendly html", async () => {
   assert.equal(response.statusCode, 200);
   assert.match(response.headers["content-type"], /text\/html/);
   assert.match(response.body, /Identity, policy, and audit evidence for autonomous agents/);
+  assert.match(response.body, /mathematical attestation layer/);
+  assert.match(response.body, /cannot quietly scrub the history/);
   assert.match(response.body, /Start the quickstart/);
   assert.match(response.body, /Hello World is the proof path/);
   assert.match(response.body, /Current:/);
   assert.match(response.body, /Planned:/);
   assert.match(response.body, /Apache-2\.0/);
   assert.match(response.body, /Explorer verification/);
+  assert.match(response.body, /Enterprise readiness/);
+  assert.match(response.body, /Life of a request/);
+  assert.match(response.body, /10-minute Web3 setup/);
+  assert.match(response.body, /Defense in depth/);
   assert.match(response.body, /Zero Trust Infrastructure/);
   assert.match(response.body, /https:\/\/discord\.gg\/cDS8MPX6G/);
   assert.match(response.body, /Phase 1 Ready/);
   assert.match(response.body, /Launch Readiness/);
   assert.match(response.body, /Interoperability/);
+  assert.match(response.body, /not raw chat storage/);
   assert.match(response.body, /Code to architecture/);
   assert.match(response.body, /broad API key/);
   assert.match(response.body, /delete a database/);
@@ -160,6 +167,9 @@ test("docs index lists repository documents", async () => {
   assert.match(response.body, /Social Kit/);
   assert.match(response.body, /SDK API/);
   assert.match(response.body, /Threat Model/);
+  assert.match(response.body, /Enterprise Readiness/);
+  assert.match(response.body, /Life Of A Request/);
+  assert.match(response.body, /10-Minute Web3 Integration/);
 });
 
 test("docs page renders markdown content", async () => {
@@ -177,6 +187,9 @@ test("all docs routes render markdown content", async () => {
     "identity-policy",
     "interoperability",
     "phase1-ready",
+    "enterprise-readiness",
+    "life-of-request",
+    "web3-integration",
     "threat-model",
     "case-studies",
     "roi-metrics",
@@ -225,7 +238,31 @@ test("interoperability inventory renders supported languages and interfaces", as
   assert.match(response.body, /agent\/protocol interfaces: 11/);
   assert.match(response.body, /Nono CLI Broker/);
   assert.match(response.body, /infrastructure\/evidence interfaces: 7/);
-  assert.match(response.body, /DAAL remains the main bounded gap/);
+  assert.match(response.body, /Base Sepolia example transactions/);
+});
+
+test("enterprise readiness and Web3 integration docs render CTO trust gaps", async () => {
+  const enterprise = fakeResponse();
+  const life = fakeResponse();
+  const web3 = fakeResponse();
+
+  await routeRequest({ method: "GET", url: "/docs/enterprise-readiness", headers: { accept: "text/html" } }, enterprise);
+  await routeRequest({ method: "GET", url: "/docs/life-of-request", headers: { accept: "text/html" } }, life);
+  await routeRequest({ method: "GET", url: "/docs/web3-integration", headers: { accept: "text/html" } }, web3);
+
+  assert.equal(enterprise.statusCode, 200);
+  assert.equal(life.statusCode, 200);
+  assert.equal(web3.statusCode, 200);
+  assert.match(enterprise.body, /Mathematical Attestation/);
+  assert.match(enterprise.body, /non-repudiation/);
+  assert.match(enterprise.body, /secure enclave \/ TEE/);
+  assert.match(enterprise.body, /Vendor Portability/);
+  assert.match(life.body, /What Does Not Leave The Control Plane/);
+  assert.match(life.body, /raw agent chat/);
+  assert.match(life.body, /CDP unavailable/);
+  assert.match(web3.body, /Required Values/);
+  assert.match(web3.body, /CDP_API_KEY_ID/);
+  assert.match(web3.body, /THIRDWEB_SECRET_KEY/);
 });
 
 test("architecture doc renders reusable diagram", async () => {
@@ -320,7 +357,7 @@ test("phase ready, risk, incident, ROI, and security artifact docs render", asyn
   assert.equal(artifacts.statusCode, 200);
   assert.equal(engagement.statusCode, 200);
   assert.match(phase.body, /Phase 1 MVP Definition/);
-  assert.match(risk.body, /MicroVM or sandbox isolation leak/);
+  assert.match(risk.body, /Sandbox isolation leak/);
   assert.match(incident.body, /War Room/);
   assert.match(roi.body, /Cost Avoidance/);
   assert.match(artifacts.body, /SBOM generation/);

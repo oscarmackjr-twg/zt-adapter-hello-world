@@ -34,7 +34,7 @@ This checklist tracks the governance, marketing, and engineering feedback for th
 | Item | Status | Solution / Reference |
 | --- | --- | --- |
 | Five-minute quickstart | Done | [README.md](./README.md) includes Node and Docker Compose paths. `docker compose config` passes. Full Compose runtime needs Docker daemon running. |
-| Decentralized audit integration proof | Partial | `zt-audit verify` exists for local audit-shaped records. Public DAAL testnet proof remains planned. [EXPLORER_VERIFICATION.md](./EXPLORER_VERIFICATION.md) now defines the explorer verification acceptance criteria and claim boundaries. |
+| Decentralized audit integration proof | Partial | `zt-audit verify` exists for local audit-shaped records. Base Sepolia MVP evidence is published in [EXPLORER_VERIFICATION.md](./EXPLORER_VERIFICATION.md); production reconciliation remains planned. |
 | Apache-2.0 license | Done | [LICENSE](./LICENSE), [NOTICE](./NOTICE), `package.json`, and `package-lock.json` now use Apache-2.0. README and homepage surface the license prominently. |
 | SECURITY.md | Done | [SECURITY.md](./SECURITY.md) exists and GitHub private vulnerability reporting is enabled. |
 | Repo cleanup | Done | Public repo excludes `.env`, `.terraform`, Terraform state, logs, and dependencies. |

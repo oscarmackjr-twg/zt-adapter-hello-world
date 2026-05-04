@@ -27,6 +27,9 @@ Start here if you need to understand the security model before writing code:
 - [Identity & Policy Spec](./IDENTITY_AND_POLICY.md): how transient agents get unique IDs and how least-privilege ABAC policies are shaped.
 - [Interoperability Inventory](./INTEROPERABILITY.md): supported languages, agent interfaces, brokers, and infrastructure evidence surfaces.
 - [Phase 1 Ready Criteria](./PHASE1_READY.md): explicit MVP completion criteria and current versus planned claims.
+- [Enterprise Readiness](./ENTERPRISE_READINESS.md): mathematical attestation, non-repudiation, resilience, signer security, and vendor portability.
+- [Life Of A Request](./LIFE_OF_REQUEST.md): exact data flow through identity, policy, broker execution, local audit, and DAAL anchoring.
+- [10-Minute Web3 Integration](./WEB3_INTEGRATION.md): required DAAL environment values and setup checklist.
 - [Threat Model](./THREAT_MODEL.md): what this system protects against and what remains the application developer's responsibility.
 - [Risk Register](./RISK_REGISTER.md): launch and architecture risks, controls, and mitigations.
 - [Incident Response](./INCIDENT_RESPONSE.md): maintainer playbook for vulnerability, secret, package, or demo incidents.
@@ -38,7 +41,7 @@ Start here if you need to understand the security model before writing code:
 - [Security Artifacts](./SECURITY_ARTIFACTS.md): SAST, dependency review, secret scan, SBOM, and audit verification evidence.
 - [Roadmap](./ROADMAP.md): planned Phase 2 work, including mTLS and SPIFFE/SPIRE integration.
 - [Engagement Strategy](./ENGAGEMENT_STRATEGY.md): launch channels, package-manager plan, and measurement loops.
-- [Explorer Verification](./EXPLORER_VERIFICATION.md): DAAL contract explorer verification status and claim boundaries.
+- [Explorer Verification](./EXPLORER_VERIFICATION.md): DAAL contract explorer verification status, example transactions, and claim boundaries.
 - [Community](./COMMUNITY.md): Discord channel status, expectations, and feedback paths.
 - [Governance](./GOVERNANCE.md): rules of engagement, stakeholder communication, and launch checklist.
 - [Launch Checklist](./LAUNCH_CHECKLIST.md): status of review feedback, completed work, and open launch items.

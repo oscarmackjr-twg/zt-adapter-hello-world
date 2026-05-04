@@ -11,6 +11,7 @@ const bundledFiles = new Map([
   ["COMMUNITY.md", fs.readFileSync(new URL("../COMMUNITY.md", import.meta.url), "utf8")],
   ["CONTRIBUTING.md", fs.readFileSync(new URL("../CONTRIBUTING.md", import.meta.url), "utf8")],
   ["ENGINEERING_SPEC.md", fs.readFileSync(new URL("../ENGINEERING_SPEC.md", import.meta.url), "utf8")],
+  ["ENTERPRISE_READINESS.md", fs.readFileSync(new URL("../ENTERPRISE_READINESS.md", import.meta.url), "utf8")],
   ["EXPLORER_VERIFICATION.md", fs.readFileSync(new URL("../EXPLORER_VERIFICATION.md", import.meta.url), "utf8")],
   ["GOVERNANCE.md", fs.readFileSync(new URL("../GOVERNANCE.md", import.meta.url), "utf8")],
   ["IDENTITY_AND_POLICY.md", fs.readFileSync(new URL("../IDENTITY_AND_POLICY.md", import.meta.url), "utf8")],
@@ -19,6 +20,7 @@ const bundledFiles = new Map([
   ["ENGAGEMENT_STRATEGY.md", fs.readFileSync(new URL("../ENGAGEMENT_STRATEGY.md", import.meta.url), "utf8")],
   ["LAUNCH_BRIEF.md", fs.readFileSync(new URL("../LAUNCH_BRIEF.md", import.meta.url), "utf8")],
   ["LAUNCH_CHECKLIST.md", fs.readFileSync(new URL("../LAUNCH_CHECKLIST.md", import.meta.url), "utf8")],
+  ["LIFE_OF_REQUEST.md", fs.readFileSync(new URL("../LIFE_OF_REQUEST.md", import.meta.url), "utf8")],
   ["PHASE1_READY.md", fs.readFileSync(new URL("../PHASE1_READY.md", import.meta.url), "utf8")],
   ["README.md", fs.readFileSync(new URL("../README.md", import.meta.url), "utf8")],
   ["RISK_REGISTER.md", fs.readFileSync(new URL("../RISK_REGISTER.md", import.meta.url), "utf8")],
@@ -30,6 +32,7 @@ const bundledFiles = new Map([
   ["SECURITY_ARTIFACTS.md", fs.readFileSync(new URL("../SECURITY_ARTIFACTS.md", import.meta.url), "utf8")],
   ["SOCIAL_KIT.md", fs.readFileSync(new URL("../SOCIAL_KIT.md", import.meta.url), "utf8")],
   ["THREAT_MODEL.md", fs.readFileSync(new URL("../THREAT_MODEL.md", import.meta.url), "utf8")],
+  ["WEB3_INTEGRATION.md", fs.readFileSync(new URL("../WEB3_INTEGRATION.md", import.meta.url), "utf8")],
   [
     "WHY_TRADITIONAL_IAM_FAILS.md",
     fs.readFileSync(new URL("../WHY_TRADITIONAL_IAM_FAILS.md", import.meta.url), "utf8"),
@@ -83,6 +86,24 @@ const docs = [
     title: "Architecture",
     file: "ARCHITECTURE.md",
     summary: "System diagram for the website, adapters, control plane, AWS runtime, and evidence path.",
+  },
+  {
+    slug: "enterprise-readiness",
+    title: "Enterprise Readiness",
+    file: "ENTERPRISE_READINESS.md",
+    summary: "Mathematical attestation, non-repudiation, provider roles, resilience, and vendor portability.",
+  },
+  {
+    slug: "life-of-request",
+    title: "Life Of A Request",
+    file: "LIFE_OF_REQUEST.md",
+    summary: "Data flow from Tailscale identity through policy, broker execution, local audit, and DAAL anchoring.",
+  },
+  {
+    slug: "web3-integration",
+    title: "10-Minute Web3 Integration",
+    file: "WEB3_INTEGRATION.md",
+    summary: "The five Web3 values, setup checklist, config check, and portability notes for DAAL.",
   },
   {
     slug: "threat-model",
@@ -387,6 +408,11 @@ function landingPage() {
         and signed evidence that security teams can verify.
       </p>
       <p>
+        DAAL is a mathematical attestation layer, not a crypto product surface. It anchors hashes of
+        authorization decisions so even a compromised administrator cannot quietly scrub the history
+        of what an agent attempted to do.
+      </p>
+      <p>
         The first proof is deliberately simple: an agent attempts a dangerous action,
         policy blocks it before execution, and the adapter returns a verifiable audit-shaped response.
       </p>
@@ -397,7 +423,7 @@ function landingPage() {
         </div>
         <div>
           <strong>Explorer verification</strong>
-          <span>Base Sepolia DAAL contract and AWS smoke transactions are published with bounded production claims.</span>
+          <span>Base Sepolia DAAL contract and AWS smoke transactions prove hash anchoring, not raw chat storage.</span>
         </div>
         <div>
           <strong>Community</strong>
@@ -420,15 +446,18 @@ function landingPage() {
       <section class="status-banner" aria-label="Current versus planned">
         <div>
           <strong>Current:</strong> public Hello World adapter, local mock control plane, deny-before-execute demo,
-          architecture docs, Docker broker example, verifier CLI, and IAM-authorized Terraform gateway example.
+          architecture docs, Docker and Nono broker examples, verifier CLI, DAAL evidence docs, and IAM-authorized Terraform gateway example.
         </div>
         <div>
           <strong>Planned:</strong> production mTLS/SPIFFE identity binding, KMS-backed public audit verification,
-          hardened cloud brokers, and DAAL testnet anchoring with reconciliation.
+          hardened cloud brokers, DAAL reconciliation alerts, and Base mainnet readiness.
         </div>
       </section>
       <div class="button-row">
         <a class="button primary" href="/quickstart">Start the quickstart</a>
+        <a class="button" href="/docs/enterprise-readiness">Enterprise readiness</a>
+        <a class="button" href="/docs/life-of-request">Life of a request</a>
+        <a class="button" href="/docs/web3-integration">10-minute Web3 setup</a>
         <a class="button" href="/docs/case-studies">Use cases</a>
         <a class="button" href="/docs/why-iam-fails">Why IAM fails agents</a>
         <a class="button" href="/docs/explorer-verification">Explorer verification</a>
@@ -450,9 +479,17 @@ function landingPage() {
           <p>Adapters call <code>POST /actions</code> before a sensitive tool, workflow, or external task runs.</p>
         </div>
         <div class="card">
-          <h2>Signed evidence</h2>
-          <p>Every decision can produce hash-chained audit evidence with KMS-backed signatures in the full MVP.</p>
+          <h2>Mathematical attestation</h2>
+          <p>Every decision can produce hash-chained evidence; DAAL anchors only hashes for non-repudiation.</p>
         </div>
+      </section>
+      <section class="doc callout">
+        <h2>Defense in depth</h2>
+        <p>
+          Nono is one execution isolation layer, not the whole trust story. The stack layers private access,
+          actor identity, policy-before-execution, broker constraints, host hardening, and immutable audit evidence.
+          If one layer weakens, the remaining controls still limit or expose unsafe actions.
+        </p>
       </section>
       <section class="flow" aria-label="Code to architecture flow">
         <h2>Code to architecture</h2>
