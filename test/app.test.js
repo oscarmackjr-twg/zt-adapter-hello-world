@@ -2,6 +2,13 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { routeRequest } from "../src/app.js";
+import {
+  getLaunchReadiness,
+  getLaunchStatus,
+  getReadinessChecklist,
+  getRiskSummary,
+  getSecurityEvidence,
+} from "../src/launch-readiness.js";
 
 function fakeResponse() {
   return {
@@ -27,7 +34,15 @@ test("root endpoint returns hello message", async () => {
   assert.equal(response.statusCode, 200);
   assert.equal(body.ok, true);
   assert.match(body.message, /ZT-Infra developer site/);
-  assert.deepEqual(body.next, ["/quickstart", "/docs", "/demo", "/health", "/demo/deny", "/demo/allow"]);
+  assert.deepEqual(body.next, [
+    "/quickstart",
+    "/docs",
+    "/demo",
+    "/launch-readiness",
+    "/health",
+    "/demo/deny",
+    "/demo/allow",
+  ]);
 });
 
 test("root endpoint returns browser-friendly html", async () => {
@@ -47,6 +62,8 @@ test("root endpoint returns browser-friendly html", async () => {
   assert.match(response.body, /Zero Trust Infrastructure/);
   assert.match(response.body, /https:\/\/discord\.gg\/cDS8MPX6G/);
   assert.match(response.body, /Phase 1 Ready/);
+  assert.match(response.body, /Launch Readiness/);
+  assert.match(response.body, /Interoperability/);
   assert.match(response.body, /Code to architecture/);
   assert.match(response.body, /broad API key/);
   assert.match(response.body, /delete a database/);
@@ -54,6 +71,45 @@ test("root endpoint returns browser-friendly html", async () => {
   assert.match(response.body, /Join the alpha/);
   assert.match(response.body, /buttondown\.com\/api\/emails\/embed-subscribe\/oscarmackjr/);
   assert.match(response.body, /Get updates/);
+});
+
+test("launch readiness functions expose PM marketing and security status", () => {
+  const status = getLaunchStatus();
+  const checklist = getReadinessChecklist();
+  const risks = getRiskSummary();
+  const evidence = getSecurityEvidence();
+  const readiness = getLaunchReadiness();
+
+  assert.equal(status.verdict, "ready-with-bounded-gaps");
+  assert.equal(status.pending, 1);
+  assert.equal(readiness.ok, true);
+  assert.ok(checklist.some((item) => item.id === "phase2-roadmap" && item.status === "done"));
+  assert.ok(checklist.some((item) => item.id === "daal-explorer-verification" && item.status === "pending"));
+  assert.ok(risks.some((risk) => risk.id === "sandbox-leak" && risk.severity === "high"));
+  assert.ok(evidence.some((artifact) => artifact.id === "sbom" && artifact.status === "done"));
+  assert.ok(evidence.some((artifact) => artifact.id === "daal-explorer" && artifact.status === "pending"));
+});
+
+test("launch readiness endpoint returns json and html dashboard", async () => {
+  const jsonResponse = fakeResponse();
+  const htmlResponse = fakeResponse();
+
+  await routeRequest({ method: "GET", url: "/launch-readiness", headers: { accept: "application/json" } }, jsonResponse);
+  await routeRequest({ method: "GET", url: "/launch-readiness", headers: { accept: "text/html" } }, htmlResponse);
+
+  const body = JSON.parse(jsonResponse.body);
+  assert.equal(jsonResponse.statusCode, 200);
+  assert.equal(body.ok, true);
+  assert.equal(body.status.verdict, "ready-with-bounded-gaps");
+  assert.equal(body.status.pending, 1);
+  assert.ok(body.checklist.some((item) => item.id === "secret-management"));
+
+  assert.equal(htmlResponse.statusCode, 200);
+  assert.match(htmlResponse.body, /Launch Readiness/);
+  assert.match(htmlResponse.body, /ready-with-bounded-gaps/);
+  assert.match(htmlResponse.body, /Verified DAAL contract address/);
+  assert.match(htmlResponse.body, /MicroVM or sandbox isolation leak/);
+  assert.match(htmlResponse.body, /CycloneDX SBOM/);
 });
 
 test("quickstart page renders readme content", async () => {
@@ -76,8 +132,12 @@ test("demo page explains json endpoints", async () => {
   assert.equal(response.statusCode, 200);
   assert.match(response.body, /Demo Flow/);
   assert.match(response.body, /Agent blocked, then authorized/);
+  assert.match(response.body, /Nono sandbox broker/);
   assert.match(response.body, /AsciinemaPlayer\.create/);
   assert.match(response.body, /agent-blocked-then-authorized\.cast/);
+  assert.match(response.body, /nono-sandbox-demo\.cast/);
+  assert.match(response.body, /\/usr\/local\/bin\/nono/);
+  assert.match(response.body, /network blocked/);
   assert.match(response.body, /Open deny JSON/);
   assert.match(response.body, /ZT_CONTROL_PLANE_URL/);
 });
@@ -90,6 +150,7 @@ test("docs index lists repository documents", async () => {
   assert.equal(response.statusCode, 200);
   assert.match(response.body, /Documentation/);
   assert.match(response.body, /Identity &amp; Policy/);
+  assert.match(response.body, /Interoperability/);
   assert.match(response.body, /Architecture/);
   assert.match(response.body, /Day 1 Use Cases/);
   assert.match(response.body, /Why IAM Fails Agents/);
@@ -114,6 +175,7 @@ test("docs page renders markdown content", async () => {
 test("all docs routes render markdown content", async () => {
   const slugs = [
     "identity-policy",
+    "interoperability",
     "phase1-ready",
     "threat-model",
     "case-studies",
@@ -148,6 +210,22 @@ test("all docs routes render markdown content", async () => {
     assert.doesNotMatch(response.body, /ENOENT/, slug);
     assert.match(response.body, /<main>/, slug);
   }
+});
+
+test("interoperability inventory renders supported languages and interfaces", async () => {
+  const response = fakeResponse();
+
+  await routeRequest({ method: "GET", url: "/docs/interoperability", headers: { accept: "text/html" } }, response);
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /Interoperability Inventory/);
+  assert.match(response.body, /Primary SDK\/runtime/);
+  assert.match(response.body, /Python/);
+  assert.match(response.body, /JavaScript \/ Node\.js/);
+  assert.match(response.body, /agent\/protocol interfaces: 11/);
+  assert.match(response.body, /Nono CLI Broker/);
+  assert.match(response.body, /infrastructure\/evidence interfaces: 7/);
+  assert.match(response.body, /DAAL remains the main bounded gap/);
 });
 
 test("architecture doc renders reusable diagram", async () => {
@@ -215,9 +293,9 @@ test("roadmap and governance clarify launch status", async () => {
   assert.equal(governance.statusCode, 200);
   assert.match(roadmap.body, /90-Day Launch Status/);
   assert.match(roadmap.body, /Phase 1 ready criteria/);
-  assert.match(roadmap.body, /Nono is not part of the public adapter MVP/);
+  assert.match(roadmap.body, /Nono is part of the public adapter MVP as an optional Execution Broker/);
   assert.match(governance.body, /Core Maintenance Team/);
-  assert.match(governance.body, /Nono is excluded from the public adapter MVP/);
+  assert.match(governance.body, /Nono is included as an optional public Execution Broker integration/);
 });
 
 test("phase ready, risk, incident, ROI, and security artifact docs render", async () => {
@@ -303,16 +381,26 @@ test("architecture svg is served for media reuse", async () => {
 
 test("asciinema cast is served for embedded demo", async () => {
   const response = fakeResponse();
+  const nono = fakeResponse();
 
   await routeRequest({
     method: "GET",
     url: "/agent-blocked-then-authorized.cast",
     headers: { accept: "application/x-asciicast" },
   }, response);
+  await routeRequest({
+    method: "GET",
+    url: "/nono-sandbox-demo.cast",
+    headers: { accept: "application/x-asciicast" },
+  }, nono);
 
   assert.equal(response.statusCode, 200);
   assert.match(response.headers["content-type"], /application\/x-asciicast/);
   assert.match(response.body, /"version"/);
+  assert.equal(nono.statusCode, 200);
+  assert.match(nono.headers["content-type"], /application\/x-asciicast/);
+  assert.match(nono.body, /Zero Trust Nono Execution Broker demo/);
+  assert.match(nono.body, /broker\.nono\.spawn_agent/);
 });
 
 test("health endpoint returns service status", async () => {
