@@ -80,14 +80,14 @@ test("launch readiness functions expose PM marketing and security status", () =>
   const evidence = getSecurityEvidence();
   const readiness = getLaunchReadiness();
 
-  assert.equal(status.verdict, "ready-with-bounded-gaps");
-  assert.equal(status.pending, 1);
+  assert.equal(status.verdict, "ready");
+  assert.equal(status.pending, 0);
   assert.equal(readiness.ok, true);
   assert.ok(checklist.some((item) => item.id === "phase2-roadmap" && item.status === "done"));
-  assert.ok(checklist.some((item) => item.id === "daal-explorer-verification" && item.status === "pending"));
+  assert.ok(checklist.some((item) => item.id === "daal-explorer-verification" && item.status === "done"));
   assert.ok(risks.some((risk) => risk.id === "sandbox-leak" && risk.severity === "high"));
   assert.ok(evidence.some((artifact) => artifact.id === "sbom" && artifact.status === "done"));
-  assert.ok(evidence.some((artifact) => artifact.id === "daal-explorer" && artifact.status === "pending"));
+  assert.ok(evidence.some((artifact) => artifact.id === "daal-explorer" && artifact.status === "done"));
 });
 
 test("launch readiness endpoint returns json and html dashboard", async () => {
@@ -100,13 +100,13 @@ test("launch readiness endpoint returns json and html dashboard", async () => {
   const body = JSON.parse(jsonResponse.body);
   assert.equal(jsonResponse.statusCode, 200);
   assert.equal(body.ok, true);
-  assert.equal(body.status.verdict, "ready-with-bounded-gaps");
-  assert.equal(body.status.pending, 1);
+  assert.equal(body.status.verdict, "ready");
+  assert.equal(body.status.pending, 0);
   assert.ok(body.checklist.some((item) => item.id === "secret-management"));
 
   assert.equal(htmlResponse.statusCode, 200);
   assert.match(htmlResponse.body, /Launch Readiness/);
-  assert.match(htmlResponse.body, /ready-with-bounded-gaps/);
+  assert.match(htmlResponse.body, /ready/);
   assert.match(htmlResponse.body, /Verified DAAL contract address/);
   assert.match(htmlResponse.body, /MicroVM or sandbox isolation leak/);
   assert.match(htmlResponse.body, /CycloneDX SBOM/);
@@ -343,7 +343,8 @@ test("community and explorer verification docs render", async () => {
   assert.match(community.body, /Zero Trust Infrastructure/);
   assert.match(community.body, /https:\/\/discord\.gg\/cDS8MPX6G/);
   assert.match(explorer.body, /Explorer verification/);
-  assert.match(explorer.body, /Pending/);
+  assert.match(explorer.body, /MVP evidence published/);
+  assert.match(explorer.body, /Partial/);
   assert.match(explorer.body, /Base Sepolia/);
 });
 

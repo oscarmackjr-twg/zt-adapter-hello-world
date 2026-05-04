@@ -38,7 +38,7 @@ The ready state is not a claim that the public starter repo is a production agen
 | Production mTLS identity | Planned Phase 2 | Adapters authenticate with workload-bound credentials and actor spoofing is denied in tests. |
 | SPIFFE/SPIRE integration | Planned Phase 2 | Agent identities map to a trust domain, issuer, expiration, and revocation flow. |
 | KMS-backed public signature verification | Planned | Public verifier validates real signatures against published keys or KMS metadata. |
-| DAAL decentralized audit anchoring | Planned / partial | Publish verified testnet contract address, explorer link, example transaction, and source commit. |
+| DAAL decentralized audit anchoring | MVP evidence published / production reconciliation pending | Base Sepolia contract and example AWS transactions are published in [EXPLORER_VERIFICATION.md](./EXPLORER_VERIFICATION.md). Production claims still require source-to-contract mapping, reconciliation, alerting, and repeatable verifier automation. |
 | Cloud execution brokers | Planned | AWS Lambda and Kubernetes brokers pass broker conformance tests without committing cloud credentials. |
 | MicroVM isolation | Planned for full runtime | Isolation boundary, escape assumptions, kernel update process, and attestation evidence are documented and tested. |
 
@@ -57,4 +57,3 @@ Approved Phase 1 claim:
 ```text
 The public MVP demonstrates deny-before-execute agent policy enforcement with a small adapter, local mock control plane, audit-shaped records, and contributor-ready docs.
 ```
-

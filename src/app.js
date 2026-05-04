@@ -397,7 +397,7 @@ function landingPage() {
         </div>
         <div>
           <strong>Explorer verification</strong>
-          <span>DAAL testnet contract verification is tracked before public claims.</span>
+          <span>Base Sepolia DAAL contract and AWS smoke transactions are published with bounded production claims.</span>
         </div>
         <div>
           <strong>Community</strong>
@@ -424,7 +424,7 @@ function landingPage() {
         </div>
         <div>
           <strong>Planned:</strong> production mTLS/SPIFFE identity binding, KMS-backed public audit verification,
-          hardened cloud brokers, and DAAL testnet anchoring.
+          hardened cloud brokers, and DAAL testnet anchoring with reconciliation.
         </div>
       </section>
       <div class="button-row">

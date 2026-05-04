@@ -26,7 +26,7 @@ Status: current
 | GitHub Project board | In Progress | Requires `gh auth refresh -s project,read:project`. |
 | Newsletter / alpha capture | Done | Homepage includes Buttondown alpha signup. |
 | Community hub | Done | Discord channel `Zero Trust Infrastructure` is linked from README, homepage, and COMMUNITY.md. |
-| DAAL public testnet proof | In Progress | Hook planned; full contract-as-a-service example not yet public. Explorer verification requirements are documented in `EXPLORER_VERIFICATION.md`. |
+| DAAL public testnet proof | MVP Evidence Published | Base Sepolia contract plus direct and batched AWS smoke transactions are documented. Production reconciliation, alerting, and verifier automation remain planned. |
 | Production identity binding | In Progress | Phase 2 mTLS/SPIFFE work. |
 | Phase 1 ready criteria | Done | `PHASE1_READY.md` defines current, experimental, and non-claimable capabilities. |
 | Risk register | Done | `RISK_REGISTER.md` tracks launch and architecture risks. |
@@ -40,7 +40,7 @@ Status: current
 | Developer onboarding | README quickstart, Docker Compose, docs site, Good First Issues | Improve CLI help and fixtures through public issues | Add SDK API reference |
 | Policy enforcement | Mock `/actions`, deny/allow demos, guarded SDK call | Versioned policy schema | Conformance suite across adapter surfaces |
 | Execution | Docker Local Broker | Cloud broker design | AWS Lambda and Kubernetes Job brokers |
-| Evidence | Audit-shaped responses, hash verifier CLI | KMS signature verification docs | DAAL testnet proof and verifier integration |
+| Evidence | Audit-shaped responses, hash verifier CLI, Base Sepolia DAAL contract, direct and batched AWS smoke transactions | KMS signature verification docs, DAAL source-to-contract mapping, reconciliation alerts | DAAL verifier integration and reconciliation docs |
 | Infrastructure | Public IAM-authorized gateway skeleton | Full one-command gateway + broker | Hardened production modules |
 | Governance | SECURITY, CONTRIBUTING, branch protection, CodeQL, Dependabot | Project board pending auth scope | Contributor milestones and release cadence |
 
@@ -181,7 +181,7 @@ Planned:
 - GitHub Actions evidence bundle.
 - DAAL/blockchain attestation sample integration.
 - Verified DAAL contract source on Base Sepolia or Polygon Amoy explorer.
-- Example `ActionLogged` transaction linked from public docs.
+- Example `ActionLogged` transaction linked from public docs. MVP Base Sepolia direct and batched AWS smoke transactions are published; production readiness still needs source-to-contract mapping, reconciliation, and alerting.
 - Trust-bundle and agent-attestation evidence export.
 - Compliance mapping from identity, policy, and audit controls to SOC 2 evidence.
 - Verifier CLI that checks identity signature, trust bundle, hash chain, and optional DAAL transaction.

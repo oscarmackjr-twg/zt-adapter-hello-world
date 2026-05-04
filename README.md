@@ -10,7 +10,7 @@ It is intentionally small: a Node.js Hello World service plus one demo call to t
 
 - **License:** Apache-2.0, chosen for enterprise-friendly infrastructure adoption and explicit patent grant language.
 - **Community:** Join the `Zero Trust Infrastructure` Discord: <https://discord.gg/cDS8MPX6G>.
-- **Explorer verification:** DAAL smart contract explorer verification is tracked in [EXPLORER_VERIFICATION.md](./EXPLORER_VERIFICATION.md). Public verification claims remain pending until a testnet contract address and verified explorer link are published.
+- **Explorer verification:** DAAL smart contract explorer verification is tracked in [EXPLORER_VERIFICATION.md](./EXPLORER_VERIFICATION.md). Base Sepolia MVP evidence is published, including direct and batched AWS smoke transactions. Production all-log claims remain pending until source mapping, reconciliation, alerting, and repeatable verifier automation are complete.
 
 ## Vision
 
@@ -332,6 +332,13 @@ await zt.langGraph({ action, nodeName });
 await zt.openAIResponses({ action, responseId });
 await zt.mcpToolCall({ toolName, resource });
 await zt.a2aTask({ externalAgent, resource });
+```
+
+Adapters that need a stable evidence summary can normalize signed audit and DAAL fields:
+
+```js
+const evidence = zt.auditEvidence(decision);
+console.log(evidence.daalTransactionLink);
 ```
 
 See [SDK_REVIEW.md](./SDK_REVIEW.md) for notes on how this differs from the draft first-customer SDK.
