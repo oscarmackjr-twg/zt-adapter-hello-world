@@ -360,6 +360,54 @@ Examples planned for this public repo:
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for the broker contract.
 
+### Docker Local Broker example
+
+The Docker Local Broker is optional. It is useful when you want to see the
+Execution Broker contract run a local container, but Docker is not required for
+CI or for the Node.js quickstart above.
+
+Start the mock control plane:
+
+```bash
+npm run zt:mock
+```
+
+In another terminal, allow the demo action:
+
+```bash
+curl -sS -X POST http://127.0.0.1:3000/policies/allow \
+  -H 'content-type: application/json' \
+  -d '{"action":"hello-world.say_hello","reason":"Allow local Docker broker demo."}'
+```
+
+Run a broker call from the repository root:
+
+```bash
+ZT_CONTROL_PLANE_URL=http://127.0.0.1:3000 node --input-type=module <<'EOF'
+import { DockerLocalBroker } from "./brokers/docker-local/index.js";
+
+const broker = new DockerLocalBroker({
+  actor: "hello-world-agent",
+});
+
+const result = await broker.run({
+  action: "hello-world.say_hello",
+  resource: "docker-local-demo",
+  image: "node:20-alpine",
+  command: ["node", "-e", "console.log('hello from docker broker')"],
+});
+
+console.log(JSON.stringify(result, null, 2));
+EOF
+```
+
+Expected result: the control plane returns `decision: "allow"`, then the broker
+starts Docker with conservative defaults such as `--network none`, `--read-only`,
+`--cap-drop ALL`, and `--security-opt no-new-privileges`.
+
+See [brokers/docker-local/README.md](./brokers/docker-local/README.md) for the
+full broker API and policy example.
+
 ## Audit Verification CLI
 
 The repo includes a small verifier for audit-shaped decision responses:
