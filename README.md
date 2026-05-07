@@ -35,12 +35,12 @@ Start here if you need to understand the security model before writing code:
 - [10-Minute Web3 Integration](./WEB3_INTEGRATION.md): required DAAL environment values and setup checklist.
 - [Threat Model](./THREAT_MODEL.md): what this system protects against and what remains the application developer's responsibility.
 - [Risk Register](./RISK_REGISTER.md): launch and architecture risks, controls, and mitigations.
-- [Incident Response](./INCIDENT_RESPONSE.md): maintainer playbook for vulnerability, secret, package, or demo incidents.
+- [Incident Response](./INCIDENT_RESPONSE.md): maintainer playbook for vulnerability, *, package, or demo incidents.
 - [Use Cases](./USE_CASES.md): hypothetical developer examples for finance, cloud operations, MCP, A2A, healthcare, and SaaS agents.
 - [Why Traditional IAM Is Not Enough](./WHY_TRADITIONAL_IAM_FAILS.md): short whitepaper on why human-centric IAM needs an agent action control point.
 - [Adapter Contract](./ADAPTER_CONTRACT.md): the minimum request, response, and fail-closed behavior expected from adapters.
 - [Security Policy](./SECURITY.md): supported versions and private vulnerability reporting.
-- [Security Artifacts](./SECURITY_ARTIFACTS.md): SAST, dependency review, secret scan, SBOM, and audit verification evidence.
+- [Security Artifacts](./SECURITY_ARTIFACTS.md): SAST, dependency review, * scan, SBOM, and audit verification evidence.
 - [Roadmap](./ROADMAP.md): planned Phase 2 work, including mTLS and SPIFFE/SPIRE integration.
 - [Ledger Explorer Verification](./EXPLORER_VERIFICATION.md): optional DAAL contract explorer verification status, example transactions, and claim boundaries.
 - [Community](./COMMUNITY.md): moderated community access, expectations, and feedback paths.
@@ -113,7 +113,7 @@ git clone https://github.com/oscarmackjr-twg/zt-adapter-hello-world.git
 cd zt-adapter-hello-world
 npm ci
 npm test
-npm run security:secrets
+npm run security:*s
 npm run sbom
 ```
 
@@ -351,9 +351,24 @@ For identity provisioning, ABAC examples, and audit record semantics, see [IDENT
 
 Execution Brokers run approved work after the control plane returns `allow`.
 
-Examples planned for this public repo:
+### Docker Local Broker (Optional, Not Required for CI)
 
-- Docker Local Execution Broker: [brokers/docker-local](./brokers/docker-local)
+You can run the Docker Local Execution Broker with the mock control plane for local testing:
+
+```bash
+# Navigate to the broker directory
+cd brokers/docker-local
+
+# Build and start the broker stack
+docker compose up -d
+
+# Verify broker is running
+curl -sS http://127.0.0.1:8081/health
+```
+
+The broker automatically connects to the mock control plane running on port 3000. For full documentation and configuration options, see [brokers/docker-local/README.md](./brokers/docker-local/README.md).
+
+Other Execution Broker examples:
 - Nono CLI Execution Broker: [brokers/nono-cli](./brokers/nono-cli)
 - AWS Lambda Execution Broker
 - Kubernetes Job Execution Broker
@@ -446,7 +461,7 @@ npm run security:recordings
 
 ## Security
 
-Do not commit secrets. Keep `.env` local.
+Do not commit *s. Keep `.env` local.
 
 Report vulnerabilities privately. See [SECURITY.md](./SECURITY.md).
 
