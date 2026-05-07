@@ -383,7 +383,7 @@ curl -sS -X POST http://127.0.0.1:3000/policies/allow \
 Run a broker call from the repository root:
 
 ```bash
-node --input-type=module <<'EOF'
+ZT_CONTROL_PLANE_URL=http://127.0.0.1:3000 node --input-type=module <<'EOF'
 import { DockerLocalBroker } from "./brokers/docker-local/index.js";
 
 const broker = new DockerLocalBroker({
